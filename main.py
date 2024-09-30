@@ -1,6 +1,7 @@
 from vpython import *
 import random
 
+
 # Define properties for all 20 standard amino acids
 amino_acids_properties = {
     "ala": vec(0.8, 0.8, 0.8),  # Alanine
@@ -27,8 +28,9 @@ amino_acids_properties = {
 
 # Define hydrophilic and hydrophobic amino acids
 hydrophilic_amino_acids = {"arg", "asn", "asp", "gln", "glu", "his", "lys", "ser", "thr", "tyr"}
+Hydrophobicity_amino_acids_phi={-4.50,-3.50,-3.50,-3.50, -3.50,-3.20,-3.90,-0.80,-0.70,-1.30}
 hydrophobic_amino_acids = {"ala", "cys", "gly", "ile", "leu", "met", "phe", "pro", "trp", "val"}
-
+Hydrophobicity_amino_acids_pho={1.80,2.50,-0.40,4.50,3.80,1.90,2.80,-1.60,-0.90,4.20}
 # Map single-letter codes to three-letter amino acid codes
 single_to_three_letter = {
     'A': 'ala', 'R': 'arg', 'N': 'asn', 'D': 'asp', 'C': 'cys', 'E': 'glu', 'Q': 'gln', 'G': 'gly',
