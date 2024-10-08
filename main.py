@@ -1,24 +1,31 @@
-from vpython import *
-import random
-import math
+from vpython import sphere, vector, color, scene, pi, cos, sin, rate
 
-c = 0
+# Set up the scene
+scene.background = color.white
 
-# Function to initialize bonds between amino acids
-def initialize_membrane(c):
-    
-    for i in range(180):
-        if c <= 180:
-            c += 1
-        elif c > 180:
-            c -= 1
-        for j in range(c):
-            sphere(pos=vec(math.sin(c/180),math.cos(c/180),), color=color.white, radius=0.1)
+# Parameters
+lipid_radius = 0.05  # Radius of lipid head spheres
+sphere_radius = 2  # Radius of the entire spherical membrane
+num_layers = 180  # Number of layers or "latitude bands" of lipids
+num_lipids_per_layer = 180  # Number of lipids per layer or "longitude lines"
 
+# Create the spherical lipid bilayer
+for layer in range(num_layers):
+    theta = pi * layer / (num_layers - 1)  # Latitude angle
+    for i in range(num_lipids_per_layer):
+        phi = 2 * pi * i / num_lipids_per_layer  # Longitude angle
+        
+        # Calculate x, y, z coordinates on the sphere surface
+        x = sphere_radius * sin(theta) * cos(phi)
+        y = sphere_radius * sin(theta) * sin(phi)
+        z = sphere_radius * cos(theta)
+        
+        # Place spheres on the top hemisphere
+        sphere(pos=vector(x, y, z), radius=lipid_radius, color=color.orange)
 
-# Initialize membrane
-initialize_membrane(c)
+# Adjust the camera view
+scene.camera.pos = vector(0, 0, sphere_radius*3)
+scene.camera.axis = vector(0, 0, -sphere_radius)
 
-# Animation loop
 while True:
-    rate(120)
+    rate(10)
